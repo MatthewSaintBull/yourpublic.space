@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, ImageHeader, CardBody, CardFooter } from "react-simple-card";
+import {config} from './config/config';
 
 import StackGrid from "react-stack-grid";
 import {
@@ -24,7 +25,7 @@ function Home() {
   
   useEffect(() => {
     async function getWalls() {
-      fetch("https://run.mocky.io/v3/4c50a24c-2df1-4d30-b4aa-77d0a7c69e6a")
+      fetch(config.getWallsApi)
         .then((res) => res.json())
         .then((data) => {
           setWalls(data);
@@ -37,7 +38,7 @@ function Home() {
     <StackGrid columnWidth={300} style={{ padding: "100px" }}>
       {walls.map((wall) => {
         return (
-          <FlippingCard>
+          <FlippingCard key={wall.id}>
             <FlippingCardBack>
               <div
                 style={{

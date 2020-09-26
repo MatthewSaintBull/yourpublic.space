@@ -1,0 +1,21 @@
+frameworkVersion: '2'
+service: your-public-space
+
+custom:
+  service: ${self:service}-dev
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+
+functions:
+  getWalls:
+    handler: handler.getWalls
+    memorySize: 256
+    timeout: 30
+    events:
+      - http: 
+          path: walls
+          method: get
+          cors: true
