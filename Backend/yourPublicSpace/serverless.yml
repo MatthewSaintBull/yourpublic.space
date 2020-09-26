@@ -19,3 +19,23 @@ functions:
           path: walls
           method: get
           cors: true
+
+resources:
+  Resources:
+    wallsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: wallsTable
+        AttributeDefinitions:
+          - AttributeName: wallId
+            AttributeType: S
+          - AttributeName: company
+            AttributeType: S
+        KeySchema:
+          - AttributeName: wallId
+            KeyType: HASH
+          - AttributeName: company
+            KeyType: RANGE
+        ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
